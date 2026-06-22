@@ -1,0 +1,80 @@
+RELATÓRIO DE EXECUÇÃO
+
+Quantidade de PDFs baixados: 26
+
+Arquivos identificados:
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/c4eab503ed291445c963c3418d525cf85fa344391d9b4b611b8f5d2248c7f663/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/673722ae66696b0df5668d1d38d2cd32ba9389ac32ff5c5acc710edca216afca/earnings_release_1t17.pdf
+- Apresentação de Resultados | https://s3.amazonaws.com/mz-filemanager/08f327aa-e610-4d9d-b683-8ff0f7caae07/ff925111-9364-4fe9-8e7b-7aa0a8ec55f1_Webcast%20%202T19%20portv.pdf
+- Release de Resultados | https://s3.amazonaws.com/mz-filemanager/08f327aa-e610-4d9d-b683-8ff0f7caae07/666fb992-a0f5-451c-86de-0c70a14dc2b2_Earnings%20Release%202T19%20portugues.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t18/968a8cb3e72660994c4b67cee0ec69f64086e919031d45838835449b1faa7d0e/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t18/40460a609edddf368d0f456474000877363546ca35fcecfd4feab6c743e57537/divulgacao_de_resultados_1t18.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/4t17/798d2729b33c931ec244eea38b5e66056b0ea0f1d2efbc7f592c59829ae2329f/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/4t17/7ed257b7c65df3c9bd5c4b43f0d53309a7537e85be646b79b117ffe99559e4e4/earnings_release_4t17_portugues.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/46c6285c3d3c377e4dc2ad351d1c0ddcc33ee6d0cbffd90aea82fd327ee83e3d/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/4309731a5a1a569ef4c684a80f507181652808adc6191b07c493244fda807363/divulgacao_de_resultados_3t17_e_9m17.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/46c6285c3d3c377e4dc2ad351d1c0ddcc33ee6d0cbffd90aea82fd327ee83e3d/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/2t17/073e50db418077c6361bdc0453ff40adc224e57674aabd34b7380551eb51c608/divulgacao_de_resultados_2t17_e_1s17.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/c4eab503ed291445c963c3418d525cf85fa344391d9b4b611b8f5d2248c7f663/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/673722ae66696b0df5668d1d38d2cd32ba9389ac32ff5c5acc710edca216afca/earnings_release_1t17.pdf
+- Apresentação de Resultados | https://s3.amazonaws.com/mz-filemanager/08f327aa-e610-4d9d-b683-8ff0f7caae07/ff925111-9364-4fe9-8e7b-7aa0a8ec55f1_Webcast%20%202T19%20portv.pdf
+- Release de Resultados | https://s3.amazonaws.com/mz-filemanager/08f327aa-e610-4d9d-b683-8ff0f7caae07/666fb992-a0f5-451c-86de-0c70a14dc2b2_Earnings%20Release%202T19%20portugues.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t18/968a8cb3e72660994c4b67cee0ec69f64086e919031d45838835449b1faa7d0e/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t18/40460a609edddf368d0f456474000877363546ca35fcecfd4feab6c743e57537/divulgacao_de_resultados_1t18.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/4t17/798d2729b33c931ec244eea38b5e66056b0ea0f1d2efbc7f592c59829ae2329f/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/4t17/7ed257b7c65df3c9bd5c4b43f0d53309a7537e85be646b79b117ffe99559e4e4/earnings_release_4t17_portugues.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/46c6285c3d3c377e4dc2ad351d1c0ddcc33ee6d0cbffd90aea82fd327ee83e3d/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/4309731a5a1a569ef4c684a80f507181652808adc6191b07c493244fda807363/divulgacao_de_resultados_3t17_e_9m17.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/3t17/46c6285c3d3c377e4dc2ad351d1c0ddcc33ee6d0cbffd90aea82fd327ee83e3d/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/2t17/073e50db418077c6361bdc0453ff40adc224e57674aabd34b7380551eb51c608/divulgacao_de_resultados_2t17_e_1s17.pdf
+- Apresentação de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/c4eab503ed291445c963c3418d525cf85fa344391d9b4b611b8f5d2248c7f663/download__da_apresentacao.pdf
+- Release de Resultados | https://mz-filemanager.s3.amazonaws.com/08f327aa-e610-4d9d-b683-8ff0f7caae07/1t17/673722ae66696b0df5668d1d38d2cd32ba9389ac32ff5c5acc710edca216afca/earnings_release_1t17.pdf
+
+Arquivos baixados:
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\earnings_release_1t17.pdf
+- output\downloads\ff925111-9364-4fe9-8e7b-7aa0a8ec55f1_Webcast%20%202T19%20portv.pdf
+- output\downloads\666fb992-a0f5-451c-86de-0c70a14dc2b2_Earnings%20Release%202T19%20portugues.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_1t18.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\earnings_release_4t17_portugues.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_3t17_e_9m17.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_2t17_e_1s17.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\earnings_release_1t17.pdf
+- output\downloads\ff925111-9364-4fe9-8e7b-7aa0a8ec55f1_Webcast%20%202T19%20portv.pdf
+- output\downloads\666fb992-a0f5-451c-86de-0c70a14dc2b2_Earnings%20Release%202T19%20portugues.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_1t18.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\earnings_release_4t17_portugues.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_3t17_e_9m17.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\divulgacao_de_resultados_2t17_e_1s17.pdf
+- output\downloads\download__da_apresentacao.pdf
+- output\downloads\earnings_release_1t17.pdf
+
+Anos disponíveis:
+- 2026
+
+Erros:
+- Erro ao abrir Central de Resultados: Locator.scroll_into_view_if_needed: Timeout 29965ms exceeded.
+Call log:
+  - attempting scroll into view action
+    2 × waiting for element to be stable
+      - element is not visible
+    - retrying scroll into view action
+    - waiting 20ms
+    2 × waiting for element to be stable
+      - element is not visible
+    - retrying scroll into view action
+      - waiting 100ms
+    55 × waiting for element to be stable
+       - element is not visible
+     - retrying scroll into view action
+       - waiting 500ms
+
