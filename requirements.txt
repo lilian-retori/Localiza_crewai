@@ -1,0 +1,7 @@
+crewai
+playwright
+openai
+python-dotenv
+pydantic
+colorama
+requests
