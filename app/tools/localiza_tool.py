@@ -1,6 +1,6 @@
 from typing import Type
-from pathlib import Path
 import requests
+from urllib.parse import urljoin
 
 from pydantic import BaseModel, Field
 from crewai.tools import BaseTool
@@ -16,7 +16,10 @@ class LocalizaToolInput(BaseModel):
 
 class LocalizaResultsDownloadTool(BaseTool):
     name: str = "Localiza Results PDF Downloader"
-    description: str = "Acessa o site de RI da Localiza, procura PDFs de Divulgação de Resultados de 2026 e baixa os arquivos."
+    description: str = (
+        "Acessa o site de RI da Localiza, procura PDFs de Divulgação de Resultados "
+        "de 2026 e baixa os arquivos."
+    )
     args_schema: Type[BaseModel] = LocalizaToolInput
 
     def _run(self, instruction: str) -> str:
@@ -30,18 +33,26 @@ class LocalizaResultsDownloadTool(BaseTool):
         screenshots = []
 
         def snap(page, label):
-            file_path = SCREENSHOTS_DIR / f"{timestamp()}_{label}.png"
-            page.screenshot(path=str(file_path), full_page=True)
-            screenshots.append(str(file_path))
-            info(f"Screenshot salva: {file_path}")
+            try:
+                file_path = SCREENSHOTS_DIR / f"{timestamp()}_{label}.png"
+                page.screenshot(path=str(file_path), full_page=True)
+                screenshots.append(str(file_path))
+                info(f"Screenshot salva: {file_path}")
+            except Exception as ex:
+                errors.append(f"Falha ao salvar screenshot '{label}': {ex}")
 
         def close_popups(page):
-            for text in ["Aceitar", "Accept", "OK", "Fechar", "Close", "Continuar", "Entendi"]:
+            popup_texts = [
+                "Aceitar", "Accept", "OK", "Fechar", "Close",
+                "Continuar", "Entendi", "Permitir", "Concordo"
+            ]
+            for text in popup_texts:
                 try:
                     btn = page.get_by_text(text, exact=False)
                     if btn.count() > 0:
                         btn.first.click(timeout=2000)
                         info(f"Popup/botão tratado: {text}")
+                        page.wait_for_timeout(1500)
                 except Exception:
                     pass
 
@@ -51,6 +62,7 @@ class LocalizaResultsDownloadTool(BaseTool):
                     locator = page.get_by_text(text, exact=False)
                     if locator.count() > 0:
                         locator.first.scroll_into_view_if_needed()
+                        page.wait_for_timeout(1000)
                         locator.first.click(timeout=5000)
                         return True, f"Clicou em '{text}'"
                 except Exception:
@@ -62,9 +74,14 @@ class LocalizaResultsDownloadTool(BaseTool):
                 response = requests.get(url, timeout=30)
                 response.raise_for_status()
 
+                content_type = response.headers.get("content-type", "").lower()
                 filename = url.split("/")[-1].split("?")[0].strip()
+
                 if not filename.lower().endswith(".pdf"):
                     filename = fallback_name
+
+                if "pdf" not in content_type and not filename.lower().endswith(".pdf"):
+                    raise RuntimeError("A URL não retornou um conteúdo PDF válido.")
 
                 path = DOWNLOADS_DIR / filename
                 path.write_bytes(response.content)
@@ -75,19 +92,30 @@ class LocalizaResultsDownloadTool(BaseTool):
         try:
             with sync_playwright() as p:
                 step("Abrindo navegador")
-                browser = p.chromium.launch(headless=False)
+                browser = p.chromium.launch(
+                    headless=False,
+                    slow_mo=1000
+                )
+
                 context = browser.new_context(accept_downloads=True)
                 page = context.new_page()
 
                 step("Acessando o site da Localiza RI")
-                page.goto("https://ri.localiza.com/", timeout=30000, wait_until="domcontentloaded")
-                page.wait_for_timeout(5000)
+                page.goto(
+                    "https://ri.localiza.com/",
+                    timeout=30000,
+                    wait_until="domcontentloaded"
+                )
+                page.wait_for_timeout(4000)
                 close_popups(page)
+                page.wait_for_timeout(2000)
                 snap(page, "home")
 
-                step("Estratégia 1: menu principal")
+                step("Estratégia 1: navegar pelo menu principal")
                 ok, msg = try_click_by_text(page, ["Informações aos Acionistas"])
                 strategy_logs.append(f"Estratégia 1A: {msg}")
+                page.wait_for_timeout(3000)
+                snap(page, "menu_informacoes_acionistas")
 
                 if not ok:
                     warning("Tentando abrir menu mobile")
@@ -101,20 +129,27 @@ class LocalizaResultsDownloadTool(BaseTool):
                         try:
                             if page.locator(selector).count() > 0:
                                 page.locator(selector).first.click(timeout=3000)
-                                page.wait_for_timeout(1500)
+                                page.wait_for_timeout(3000)
+                                snap(page, "menu_mobile_aberto")
                                 break
                         except Exception:
                             pass
+
                     ok, msg = try_click_by_text(page, ["Informações aos Acionistas"])
                     strategy_logs.append(f"Estratégia 1B: {msg}")
+                    page.wait_for_timeout(3000)
+                    snap(page, "menu_informacoes_acionistas_mobile")
 
                 ok2, msg2 = try_click_by_text(page, ["Central de Resultados"])
                 strategy_logs.append(f"Estratégia 1C: {msg2}")
                 page.wait_for_timeout(5000)
                 snap(page, "central_resultados")
 
-                step("Estratégia 2: mapeando anos disponíveis")
-                body_text = page.locator("body").inner_text(timeout=10000)
+                step("Estratégia 2: mapear anos disponíveis")
+                try:
+                    body_text = page.locator("body").inner_text(timeout=10000)
+                except Exception:
+                    body_text = ""
 
                 for token in ["2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018"]:
                     if token in body_text:
@@ -124,9 +159,12 @@ class LocalizaResultsDownloadTool(BaseTool):
                     y = page.get_by_text("2026", exact=False)
                     if y.count() > 0:
                         y.first.scroll_into_view_if_needed()
+                        page.wait_for_timeout(1000)
                         y.first.click(timeout=3000)
-                        page.wait_for_timeout(2000)
+                        page.wait_for_timeout(3000)
                         strategy_logs.append("Estratégia 2A: seção 2026 clicada/expandida")
+                    else:
+                        strategy_logs.append("Estratégia 2A: ano 2026 não visível")
                 except Exception:
                     strategy_logs.append("Estratégia 2A: ano 2026 não clicável")
 
@@ -141,19 +179,24 @@ class LocalizaResultsDownloadTool(BaseTool):
                         link = links.nth(i)
                         text = (link.inner_text() or "").strip()
                         href = link.get_attribute("href") or ""
+                        absolute_href = urljoin(page.url, href)
                         mix = f"{text} {href}".lower()
 
-                        if (
+                        is_candidate = (
                             ("divulgação" in mix and "resultado" in mix)
                             or ("resultado" in mix and ".pdf" in mix)
-                        ):
+                            or ("release" in mix and ".pdf" in mix)
+                        )
+
+                        if is_candidate:
                             identified_items.append({
                                 "name": text if text else "Sem texto visível",
-                                "href": href if href else "não capturada"
+                                "href": absolute_href if href else "não capturada"
                             })
 
                             try:
                                 link.scroll_into_view_if_needed()
+                                page.wait_for_timeout(1000)
 
                                 with page.expect_download(timeout=12000) as download_info:
                                     link.click(timeout=5000)
@@ -163,27 +206,31 @@ class LocalizaResultsDownloadTool(BaseTool):
                                 download.save_as(str(save_path))
                                 found_files.append(str(save_path))
                                 success(f"Download concluído: {save_path.name}")
+                                page.wait_for_timeout(2000)
                                 continue
 
                             except Exception:
                                 pass
 
-                            if href.lower().endswith(".pdf"):
+                            if ".pdf" in absolute_href.lower():
                                 try:
                                     pdf_path = download_direct_pdf(
-                                        href,
+                                        absolute_href,
                                         fallback_name=f"localiza_resultado_{i}.pdf"
                                     )
                                     found_files.append(str(pdf_path))
                                     success(f"Download direto concluído: {pdf_path.name}")
+                                    page.wait_for_timeout(1500)
                                 except Exception as ex:
                                     errors.append(str(ex))
+
                     except Exception:
                         continue
 
                 strategy_logs.append("Estratégia 3: varredura finalizada")
                 snap(page, "final")
 
+                page.wait_for_timeout(5000)
                 browser.close()
 
         except Exception as ex:
@@ -199,9 +246,10 @@ class LocalizaResultsDownloadTool(BaseTool):
         report_lines.append(f"- **Status:** {status}")
         report_lines.append("")
         report_lines.append("## 2. Estratégias utilizadas")
-        for item in strategy_logs:
-            report_lines.append(f"- {item}")
-        if not strategy_logs:
+        if strategy_logs:
+            for item in strategy_logs:
+                report_lines.append(f"- {item}")
+        else:
             report_lines.append("- Nenhuma estratégia foi registrada.")
         report_lines.append("")
         report_lines.append("## 3. Arquivos identificados")
@@ -252,4 +300,3 @@ class LocalizaResultsDownloadTool(BaseTool):
         success(f"Relatório salvo em: {report_file}")
 
         return report
-
